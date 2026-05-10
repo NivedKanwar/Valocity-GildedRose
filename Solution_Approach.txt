@@ -1,0 +1,13 @@
+
+Summary : The existing code is restructed to new classes and methods to improve readability and maintainability.
+The main logic is divided into smaller, more focused methods that handle specific tasks. 
+This allows for better separation of concerns and makes the code easier to understand and test. 
+Additionally, comments are added to explain the purpose of each method and the overall flow of the program. 
+The new structure also allows for easier future modifications and enhancements without affecting the entire codebase.
+
+Approach : Based on prior experience with similar codebases, the following approach was taken to restructure the code: 
+Strategy Pattern was implemented to separate the different strategies for handling various scenarios. 
+This was discussed with GitHub Copilot and it was agreed that this would be the best approach.
+
+AI Assistance : GitHub Copilot was used to generate the initial code structure and to suggest improvements throughout the refactoring process.
+Also, Co-pilot generated all the test cases for the new structure.
