@@ -6,8 +6,6 @@ using GildedRose.Console.Models;
 
 namespace GildedRose.Console.Updaters
 {
-    // This is extra check added on top of actual updaters so that we can be sure that the quality constraints are not violated by any of the updaters.
-    // This is especially useful for future-proofing against accidental mistakes when new updaters are added.
     internal class ValidatingUpdater : IItemUpdater
     {
         private readonly IItemUpdater _inner;
@@ -21,11 +19,26 @@ namespace GildedRose.Console.Updaters
 
         public void Update(Item item)
         {
+            if (_constraint != null)
+            {
+                // For range constraints (Min/Max) enforce the initial state as well.
+                // Exact constraints (e.g. Sulfuras) are only enforced after the updater runs
+                // to allow the updater to correct the value to the required exact value.
+                if (_constraint.Exact == int.MinValue)
+                {
+                    if (item.Quality < _constraint.Min || item.Quality > _constraint.Max)
+                    {
+                        throw new InvalidOperationException(
+                            $"Item '{item.Name}' initial quality {item.Quality} is outside allowed range [{_constraint.Min},{_constraint.Max}].");
+                    }
+                }
+            }
+
             _inner.Update(item);
 
             if (_constraint == null) return;
 
-            // Exact enforcement takes precedence
+            // Exact enforcement takes precedence for post-update validation
             if (_constraint.Exact != int.MinValue)
             {
                 if (item.Quality != _constraint.Exact)
