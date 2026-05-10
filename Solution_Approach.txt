@@ -9,5 +9,5 @@ Approach : Based on prior experience with similar codebases, the following appro
 Strategy Pattern was implemented to separate the different strategies for handling various scenarios. 
 This was discussed with GitHub Copilot and it was agreed that this would be the best approach.
 
-AI Assistance : GitHub Copilot was used to generate the initial code structure and to suggest improvements throughout the refactoring process.
+AI Assistance : GitHub Copilot(GPT-5 mini) was used to generate the initial code structure and to suggest improvements throughout the refactoring process.
 Also, Co-pilot generated all the test cases for the new structure.
