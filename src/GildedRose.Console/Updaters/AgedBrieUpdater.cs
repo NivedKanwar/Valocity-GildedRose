@@ -4,6 +4,7 @@ using GildedRose.Console.Models;
 
 namespace GildedRose.Console.Updaters
 {
+    [QualityConstraint(Min = QualityConstants.MinQuality, Max = QualityConstants.MaxQuality)]
     internal class AgedBrieUpdater : IItemUpdater
     {
         // Aged Brie increases in Quality as it gets older.Logic Verified.

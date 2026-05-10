@@ -4,6 +4,7 @@ using GildedRose.Console.Helpers;
 
 namespace GildedRose.Console.Updaters
 {
+    [QualityConstraint(Exact = QualityConstants.LegendaryQuality)]
     internal class SulfurasUpdater : IItemUpdater
     {
         public void Update(Item item)

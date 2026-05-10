@@ -4,6 +4,7 @@ using GildedRose.Console.Models;
 
 namespace GildedRose.Console.Updaters
 {
+    [QualityConstraint(Min = QualityConstants.MinQuality, Max = QualityConstants.MaxQuality)]
     internal class ConjuredUpdater : IItemUpdater
     {
         // Conjured items degrade twice as fast as normal items:

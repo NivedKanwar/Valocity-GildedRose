@@ -4,6 +4,7 @@ using GildedRose.Console.Models;
 
 namespace GildedRose.Console.Updaters
 {
+    [QualityConstraint(Min = QualityConstants.MinQuality, Max = QualityConstants.MaxQuality)]
     internal class NormalUpdater : IItemUpdater
     {
         public void Update(Item item)

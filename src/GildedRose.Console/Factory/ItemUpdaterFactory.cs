@@ -1,7 +1,7 @@
-﻿using System;
-using GildedRose.Console.Interfaces;
+﻿using GildedRose.Console.Interfaces;
 using GildedRose.Console.Models;
 using GildedRose.Console.Updaters;
+using System;
 
 namespace GildedRose.Console.Factory
 {
@@ -9,23 +9,27 @@ namespace GildedRose.Console.Factory
     {
         public static IItemUpdater Create(Item item)
         {
-            switch (item.Name)
+            if (item is null) throw new ArgumentNullException(nameof(item));
+
+            IItemUpdater updater = item.Name switch
             {
-                case string s when string.Equals(s, "Sulfuras, Hand of Ragnaros", StringComparison.OrdinalIgnoreCase):
-                    return new SulfurasUpdater();
+                string s when string.Equals(s, "Sulfuras, Hand of Ragnaros", StringComparison.OrdinalIgnoreCase)
+                    => new SulfurasUpdater(),
 
-                case string s when string.Equals(s, "Aged Brie", StringComparison.OrdinalIgnoreCase):
-                    return new AgedBrieUpdater();
+                string s when string.Equals(s, "Aged Brie", StringComparison.OrdinalIgnoreCase)
+                    => new AgedBrieUpdater(),
 
-                case string s when string.Equals(s, "Backstage passes to a TAFKAL80ETC concert", StringComparison.OrdinalIgnoreCase):
-                    return new BackstageUpdater();
+                string s when string.Equals(s, "Backstage passes to a TAFKAL80ETC concert", StringComparison.OrdinalIgnoreCase)
+                    => new BackstageUpdater(),
 
-                case string s when string.Equals(s, "Conjured Mana Cake", StringComparison.OrdinalIgnoreCase):
-                    return new ConjuredUpdater();
+                string s when string.Equals(s, "Conjured Mana Cake", StringComparison.OrdinalIgnoreCase)
+                    => new ConjuredUpdater(),
 
-                default:
-                    return new NormalUpdater();
-            }
+                _ => new NormalUpdater()
+            };
+
+            // Wrap with validation so constraints are enforced after each update.
+            return new ValidatingUpdater(updater);
         }
     }
 }

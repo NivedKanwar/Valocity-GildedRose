@@ -4,6 +4,7 @@ using GildedRose.Console.Models;
 
 namespace GildedRose.Console.Updaters
 {
+    [QualityConstraint(Min = QualityConstants.MinQuality, Max = QualityConstants.MaxQuality)]
     internal class BackstageUpdater : IItemUpdater
     {
         // Backstage passes increase in Quality as its SellIn value approaches; Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but Quality drops to 0 after the concert.
